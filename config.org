@@ -1,9 +1,17 @@
+
 #+TITLE: patchouli(emacs) config
 [[./images/patchouli.png]]
 
 * emacs tweaks
 ** coding improvements
 #+BEGIN_SRC emacs-lisp :tangle yes
+  ;; syntax highlighting
+  (setq font-lock-maximum-decoration t)
+  (global-font-lock-mode t)
+  
+  ;; syntax highlighting for cxx (why doesn't this just work?)
+  ;;(add-hook 'c++-mode-hook #'font-lock-mode)
+
   ;; line numbers
   (setq-default line-number-mode t)
   (global-display-line-numbers-mode 1)
@@ -22,7 +30,7 @@
   (setq-default tab-width 4)
   (setq-default tab-stop-list 4)
   (setq-default electric-indent-inhibit t)
-  (setq-default indent-line-function 'insert-tab)
+  ;;(setq-default indent-line-function 'insert-tab)
 
   ;; automatically complete brackets/quotes
   (setq-default electric-pair-pairs '(
@@ -57,14 +65,14 @@
   (setq initial-scratch-message "")
 
   ;; Removes *scratch* from buffer after the mode has been set.
-  (defun remove-scratch-buffer ()
-    (if (get-buffer "*scratch*")
-        (kill-buffer "*scratch*")))
-  (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+  ;;(defun remove-scratch-buffer ()
+  ;;  (if (get-buffer "*scratch*")
+  ;;      (kill-buffer "*scratch*")))
+  ;;(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
   ;; Removes *messages* from the buffer.
   (setq-default message-log-max nil)
-  (kill-buffer "*Messages*")
+  ;;(kill-buffer "*Messages*")
 
   ;; Removes *Completions* from buffer after you've opened a file.
   (add-hook 'minibuffer-exit-hook
@@ -133,13 +141,13 @@ we'll use erc as our client because why not
   (setq erc-scrolltobottom-all t)
 #+END_SRC
 * packages
-** aggressive indent
+** aggressive indent (disabled)
 keeps code properly indented
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package aggressive-indent
-    :ensure t
-    :init
-    (add-hook 'prog-mode-hook 'aggressive-indent-mode))
+;  (use-package aggressive-indent
+;    :ensure t
+;    :init
+;    (add-hook 'prog-mode-hook 'aggressive-indent-mode))
 #+END_SRC
 ** beacon
 find cursor after moving
@@ -188,7 +196,7 @@ dim inactive windows
 ** editorconfig
 load various things from a .editorconfig file
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package editorconfig
+(use-package editorconfig
     :ensure t
     :config
     (editorconfig-mode 1))
@@ -201,7 +209,6 @@ set our discord status
     :init
     (elcord-mode 1))
 #+END_SRC
-
 ** erc
 #+BEGIN_SRC emacs-lisp :tangle yes
             ;; irc client stuffs
@@ -305,10 +312,10 @@ language server protocol
     :init
     (setq lsp-keymap-prefix "C-c l"
           lsp-idle-delay 0.1)
-    :hook ((c++-mode . clangd)
-           (python-mode . lsp)
-           (c-mode . clangd)
-           (csharp-mode . omnisharp))
+    ;;:hook ((c++-mode . clangd)
+    ;;       (python-mode . lsp)
+    ;;       (c-mode . clangd)
+    ;;       (csharp-mode . omnisharp))
     :commands lsp)
 
   (use-package lsp-ui
@@ -324,10 +331,12 @@ git client in emacs
     :bind (("C-x g" . magit-status)
            ("C-x C-g" . magit-status)))
 #+END_SRC
-** multiple-cursors
+** multiple-cursors (disabled)
 ;; lets you edit multiple lines at once
-(use-package multiple-cursors
-    :ensure t)
+; #+BEGIN_SRC emacs-lisp :tangle yes
+; (use-package multiple-cursors
+;    :ensure t)
+; #+END_SRC
 ** pc-bufsw
 switch buffers with ctrl+tab
 #+BEGIN_SRC emacs-lisp :tangle yes

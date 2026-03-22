@@ -1,3 +1,10 @@
+;; syntax highlighting
+(setq font-lock-maximum-decoration t)
+(global-font-lock-mode t)
+
+;; syntax highlighting for cxx (why doesn't this just work?)
+;;(add-hook 'c++-mode-hook #'font-lock-mode)
+
 ;; line numbers
 (setq-default line-number-mode t)
 (global-display-line-numbers-mode 1)
@@ -16,7 +23,7 @@
 (setq-default tab-width 4)
 (setq-default tab-stop-list 4)
 (setq-default electric-indent-inhibit t)
-(setq-default indent-line-function 'insert-tab)
+;;(setq-default indent-line-function 'insert-tab)
 
 ;; automatically complete brackets/quotes
 (setq-default electric-pair-pairs '(
@@ -47,14 +54,14 @@
 (setq initial-scratch-message "")
 
 ;; Removes *scratch* from buffer after the mode has been set.
-(defun remove-scratch-buffer ()
-  (if (get-buffer "*scratch*")
-      (kill-buffer "*scratch*")))
-(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+;;(defun remove-scratch-buffer ()
+;;  (if (get-buffer "*scratch*")
+;;      (kill-buffer "*scratch*")))
+;;(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
 ;; Removes *messages* from the buffer.
 (setq-default message-log-max nil)
-(kill-buffer "*Messages*")
+;;(kill-buffer "*Messages*")
 
 ;; Removes *Completions* from buffer after you've opened a file.
 (add-hook 'minibuffer-exit-hook
@@ -106,10 +113,10 @@
 ;; Scroll all windows to prompt when submitting input.
 (setq erc-scrolltobottom-all t)
 
-(use-package aggressive-indent
-  :ensure t
-  :init
-  (add-hook 'prog-mode-hook 'aggressive-indent-mode))
+;  (use-package aggressive-indent
+;    :ensure t
+;    :init
+;    (add-hook 'prog-mode-hook 'aggressive-indent-mode))
 
 (use-package beacon
   :ensure t
@@ -144,9 +151,9 @@
   (dimmer-mode t))
 
 (use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode 1))
+    :ensure t
+    :config
+    (editorconfig-mode 1))
 
 (use-package elcord
   :ensure t
@@ -235,10 +242,10 @@
   :init
   (setq lsp-keymap-prefix "C-c l"
         lsp-idle-delay 0.1)
-  :hook ((c++-mode . clangd)
-         (python-mode . lsp)
-         (c-mode . clangd)
-         (csharp-mode . omnisharp))
+  ;;:hook ((c++-mode . clangd)
+  ;;       (python-mode . lsp)
+  ;;       (c-mode . clangd)
+  ;;       (csharp-mode . omnisharp))
   :commands lsp)
 
 (use-package lsp-ui
