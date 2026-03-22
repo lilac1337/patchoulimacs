@@ -386,3 +386,11 @@ show key bindings
     :init
     (which-key-mode))
 #+END_SRC
+** yasnippet
+autocomplete for company-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package yasnippet
+    :ensure t
+    :init
+    (yas-global-mode 1))
+#+END_SRC
