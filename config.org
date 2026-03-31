@@ -140,6 +140,10 @@ we'll use erc as our client because why not
   ;; Scroll all windows to prompt when submitting input.
   (setq erc-scrolltobottom-all t)
 #+END_SRC
+** other
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq dired-kill-when-opening-new-dired-buffer t)
+#+END_SRC
 * packages
 ** aggressive indent (disabled)
 keeps code properly indented
@@ -322,6 +326,13 @@ language server protocol
     :ensure t
     :init
     (lsp-ui-mode t))
+#+END_SRC
+** lua-mode
+lua stuffs
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package lua-mode
+    :ensure t
+    :init)
 #+END_SRC
 ** magit
 git client in emacs

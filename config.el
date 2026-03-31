@@ -253,6 +253,10 @@
   :init
   (lsp-ui-mode t))
 
+(use-package lua-mode
+  :ensure t
+  :init)
+
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status)
@@ -287,3 +291,8 @@
   :ensure t
   :init
   (which-key-mode))
+
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1))
