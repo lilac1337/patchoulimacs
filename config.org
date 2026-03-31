@@ -364,6 +364,13 @@ highlight delimiters
     :init
     (rainbow-delimiters-mode 1))
 #+END_SRC
+** swiper
+cool search minibuffer thing
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package swiper
+    :ensure t
+    :bind ("C-s" . 'swiper))
+#+END_SRC
 ** treemacs
 show a nice little file view with M-x treemacs
 #+BEGIN_SRC emacs-lisp :tangle yes

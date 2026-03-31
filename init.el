@@ -29,7 +29,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(aggressive-indent beacon company dashboard dimmer editorconfig
+                       elcord ewal-spacemacs-themes flycheck
+                       good-scroll goto-line-preview lsp-java lsp-ui
+                       lua-mode magit pc-bufsw protobuf-mode
+                       rainbow-delimiters rainbow-mode sourcepawn-mode
+                       swiper typescript-mode wakatime-mode which-key
+                       yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
