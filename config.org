@@ -1,5 +1,6 @@
 #+TITLE: patchouli(emacs) config
 [[./images/patchouli.png]]
+
 the cutest emacs config!
 * emacs tweaks
 ** coding improvements
