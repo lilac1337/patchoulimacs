@@ -142,7 +142,9 @@ we'll use erc as our client because why not
 #+END_SRC
 ** other
 #+BEGIN_SRC emacs-lisp :tangle yes
+  ;; dired-mode
   (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-dwim-target t)
 #+END_SRC
 * packages
 ** aggressive indent (disabled)
