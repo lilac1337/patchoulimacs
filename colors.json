@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/remilia/.config/hypr/flower.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#25132d",
+        "foreground": "#e6e4f4",
+        "cursor": "#e6e4f4"
+    },
+    "colors": {
+        "color0": "#25132d",
+        "color1": "#D06AA8",
+        "color2": "#9B74CB",
+        "color3": "#7D86C9",
+        "color4": "#A999E2",
+        "color5": "#CD95C3",
+        "color6": "#DEA3DD",
+        "color7": "#e6e4f4",
+        "color8": "#a19faa",
+        "color9": "#D06AA8",
+        "color10": "#9B74CB",
+        "color11": "#7D86C9",
+        "color12": "#A999E2",
+        "color13": "#CD95C3",
+        "color14": "#DEA3DD",
+        "color15": "#e6e4f4"
+    }
+}

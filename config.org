@@ -259,7 +259,7 @@ generate color scheme automatically from pywal
     :ensure t
     :init (setq ewal-use-built-in-always-p nil
                 ewal-use-built-in-on-failure-p t
-                ewal-json-file "~/.cache/wal/colors.json"
+                ewal-json-file "~/.emacs.d/colors.json"
                 ewal-built-in-palette "sexy-material"))
 
   (use-package ewal-spacemacs-themes

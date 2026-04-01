@@ -113,7 +113,9 @@
 ;; Scroll all windows to prompt when submitting input.
 (setq erc-scrolltobottom-all t)
 
+;; dired-mode
 (setq dired-kill-when-opening-new-dired-buffer t)
+(setq dired-dwim-target t)
 
 ;  (use-package aggressive-indent
 ;    :ensure t
