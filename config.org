@@ -3,10 +3,10 @@
 
 the cutest emacs config!
 * installation
-just run these commands and you shall be made an apprentice of gensokyo's finest librarian
+just run these commands and you shall be made an apprentice of gensokyo's finest librarian!
 #+BEGIN_SRC shell
 git clone https://github.com/lilac1337/patchoulimacs.git
-cp patchoulimacs/* ~/.emacs.d/
+cp -r patchoulimacs/* ~/.emacs.d/
 #+END_SRC
 if you're on windows, idk you'll have to google where to put emacs configs
 * emacs tweaks
