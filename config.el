@@ -113,6 +113,8 @@
 ;; Scroll all windows to prompt when submitting input.
 (setq erc-scrolltobottom-all t)
 
+(setq dired-kill-when-opening-new-dired-buffer t)
+
 ;  (use-package aggressive-indent
 ;    :ensure t
 ;    :init
@@ -271,6 +273,10 @@
   :ensure t
   :init
   (rainbow-delimiters-mode 1))
+
+(use-package swiper
+  :ensure t
+  :bind ("C-s" . 'swiper))
 
 (use-package treemacs
   :ensure t)
