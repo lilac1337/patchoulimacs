@@ -133,13 +133,13 @@
   (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package dashboard
-    :ensure t
-    :config
-    (dashboard-setup-startup-hook)
-    (setq dashboard-items '((recents . 10)))
-;;    (setq dashboard-banner-logo-title )
-    (setq dashboard-center-content t)
-    (setq dashboard-startup-banner "~/.emacs.d/images/patchouli.png"))
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-items '((recents . 10)))
+  ;;    (setq dashboard-banner-logo-title )
+  (setq dashboard-center-content t)
+  (setq dashboard-startup-banner "~/.emacs.d/images/patchouli.png"))
 
 (use-package dimmer
   :ensure t
@@ -264,8 +264,8 @@
   :bind (("C-x g" . magit-status)
          ("C-x C-g" . magit-status)))
 
-; (use-package multiple-cursors
-;    :ensure t)
+;;  (use-package multiple-cursors
+;;    :ensure t)
 
 (use-package pc-bufsw
   :ensure t

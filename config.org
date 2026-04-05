@@ -156,10 +156,10 @@ we'll use erc as our client because why not
 ** aggressive indent (disabled)
 keeps code properly indented
 #+BEGIN_SRC emacs-lisp :tangle yes
-;;  (use-package aggressive-indent
-;;    :ensure t
-;;    :init
-;;    (add-hook 'prog-mode-hook 'aggressive-indent-mode))
+  ;;  (use-package aggressive-indent
+  ;;    :ensure t
+  ;;    :init
+  ;;    (add-hook 'prog-mode-hook 'aggressive-indent-mode))
 #+END_SRC
 ** beacon
 find cursor after moving
@@ -187,7 +187,7 @@ add a nice dashboard for when you open emacs
     :config
     (dashboard-setup-startup-hook)
     (setq dashboard-items '((recents . 10)))
-;;    (setq dashboard-banner-logo-title )
+    ;;    (setq dashboard-banner-logo-title )
     (setq dashboard-center-content t)
     (setq dashboard-startup-banner "~/.emacs.d/images/patchouli.png"))
 #+END_SRC
@@ -349,8 +349,8 @@ git client in emacs
 ** multiple-cursors (disabled)
 lets you edit multiple lines at once
 #+BEGIN_SRC emacs-lisp :tangle yes
-; (use-package multiple-cursors
-;    :ensure t)
+  ;;  (use-package multiple-cursors
+  ;;    :ensure t)
 #+END_SRC
 ** pc-bufsw
 switch buffers with C-tab
