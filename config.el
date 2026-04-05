@@ -2,9 +2,6 @@
 (setq font-lock-maximum-decoration t)
 (global-font-lock-mode t)
 
-;; syntax highlighting for cxx (why doesn't this just work?)
-;;(add-hook 'c++-mode-hook #'font-lock-mode)
-
 ;; line numbers
 (setq-default line-number-mode t)
 (global-display-line-numbers-mode 1)
@@ -88,6 +85,7 @@
 ;; automatically start an emacs server with emacs, since we use emacsclient in the terminal
 (server-start)
 
+;; change this to whatever shell you use
 (defvar my-term-shell "/bin/zsh")
 (defadvice ansi-term (before force-bash)
   (interactive (list my-term-shell)))
@@ -117,10 +115,10 @@
 (setq dired-kill-when-opening-new-dired-buffer t)
 (setq dired-dwim-target t)
 
-;  (use-package aggressive-indent
-;    :ensure t
-;    :init
-;    (add-hook 'prog-mode-hook 'aggressive-indent-mode))
+;;  (use-package aggressive-indent
+;;    :ensure t
+;;    :init
+;;    (add-hook 'prog-mode-hook 'aggressive-indent-mode))
 
 (use-package beacon
   :ensure t
@@ -155,9 +153,9 @@
   (dimmer-mode t))
 
 (use-package editorconfig
-    :ensure t
-    :config
-    (editorconfig-mode 1))
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
 (use-package elcord
   :ensure t
@@ -165,43 +163,43 @@
   (elcord-mode 1))
 
 ;; irc client stuffs
-    (use-package erc
-      :custom
-      ;;(erc-autojoin-channels-alist '(("freenode.net" "#archlinux" "#bash" "#bitcoin"
-      ;;                                "#emacs" "#gentoo" "#i3" "#latex" "#org-mode" "#python")))
-      (erc-autojoin-timing 'ident)
-      (erc-fill-function 'erc-fill-static)
-      (erc-fill-static-center 22)
-      (erc-hide-list '("JOIN" "PART" "QUIT"))
-      (erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
-      (erc-lurker-threshold-time 43200)
-      (erc-prompt-for-nickserv-password nil)
-      (erc-server-reconnect-attempts 5)
-      (erc-server-reconnect-timeout 3)
+(use-package erc
+  :custom
+  ;;(erc-autojoin-channels-alist '(("freenode.net" "#archlinux" "#bash" "#bitcoin"
+  ;;                                "#emacs" "#gentoo" "#i3" "#latex" "#org-mode" "#python")))
+  (erc-autojoin-timing 'ident)
+  (erc-fill-function 'erc-fill-static)
+  (erc-fill-static-center 22)
+  (erc-hide-list '("JOIN" "PART" "QUIT"))
+  (erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
+  (erc-lurker-threshold-time 43200)
+  (erc-prompt-for-nickserv-password nil)
+  (erc-server-reconnect-attempts 5)
+  (erc-server-reconnect-timeout 3)
 
 
-      (erc-track-exclude-types '("JOIN" "MODE" "NICK" "PART" "QUIT"
-                                 "324" "329" "332" "333" "353" "477"))                                
-    :config
-    (add-to-list 'erc-modules 'notifications)
-    (add-to-list 'erc-modules 'spelling)
-    (erc-services-mode 1)
-    (erc-log-mode)
-    ;; this directory needs to be manually created
-    ;; http://www.nihamkin.com/2013/12/04/how-to-enable-logging-of-chat-sessions-in-erc/
+  (erc-track-exclude-types '("JOIN" "MODE" "NICK" "PART" "QUIT"
+                             "324" "329" "332" "333" "353" "477"))                                
+  :config
+  (add-to-list 'erc-modules 'notifications)
+  (add-to-list 'erc-modules 'spelling)
+  (erc-services-mode 1)
+  (erc-log-mode)
+  ;; this directory needs to be manually created
+  ;; http://www.nihamkin.com/2013/12/04/how-to-enable-logging-of-chat-sessions-in-erc/
   (setq erc-log-channels-directory "~/.emacs.d/erc/logs/")
-(setq erc-generate-log-file-name-function (quote erc-generate-log-file-name-with-date))
-    (setq erc-save-buffer-on-part nil)
-    (setq erc-save-queries-on-quit nil)
-    (setq erc-log-write-after-insert t)
-    (setq erc-log-write-after-send t)
-    (erc-update-modules))
+  (setq erc-generate-log-file-name-function (quote erc-generate-log-file-name-with-date))
+  (setq erc-save-buffer-on-part nil)
+  (setq erc-save-queries-on-quit nil)
+  (setq erc-log-write-after-insert t)
+  (setq erc-log-write-after-send t)
+  (erc-update-modules))
 
 (use-package ewal
   :ensure t
   :init (setq ewal-use-built-in-always-p nil
               ewal-use-built-in-on-failure-p t
-              ewal-json-file "~/.cache/wal/colors.json"
+              ewal-json-file "~/.emacs.d/colors.json"
               ewal-built-in-palette "sexy-material"))
 
 (use-package ewal-spacemacs-themes
@@ -212,6 +210,10 @@
   :config (progn
             (load-theme 'ewal-spacemacs-modern t)
             (enable-theme 'ewal-spacemacs-modern)))
+
+(use-package lua-mode
+  :ensure t
+  :init)
 
 (use-package protobuf-mode
   :ensure t
@@ -257,14 +259,13 @@
   :init
   (lsp-ui-mode t))
 
-(use-package lua-mode
-  :ensure t
-  :init)
-
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status)
          ("C-x C-g" . magit-status)))
+
+; (use-package multiple-cursors
+;    :ensure t)
 
 (use-package pc-bufsw
   :ensure t
@@ -286,6 +287,7 @@
 (use-package lsp-treemacs
   :ensure t)
 
+;; put (setq wakatime-pass "waka_yourapikeyhere") in ~/.emacs.d/pass.el to use
 (when (load-file "~/.emacs.d/pass.el") 
   (use-package wakatime-mode
     :ensure t
