@@ -108,8 +108,8 @@ non-coding related editing enhancements
 #+END_SRC
 ** server
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; automatically start an emacs server with emacs, since we use emacsclient in the terminal
-(server-start)
+  ;; automatically start an emacs server with emacs, since we use emacsclient in the terminal
+  (server-start)
 #+END_SRC
 ** terminal
 use a terminal editor in emacs with M-x eshell
@@ -148,8 +148,11 @@ we'll use erc as our client because why not
 #+END_SRC
 ** other
 #+BEGIN_SRC emacs-lisp :tangle yes
-  ;; dired-mode
+  ;; dired-mode ;;
+  ;; don't make a new window whenever you open a new directory in dired
   (setq dired-kill-when-opening-new-dired-buffer t)
+  
+  ;; if you have multiple dired buffers, have the last dired buffer's directory be the default target
   (setq dired-dwim-target t)
 #+END_SRC
 * packages
