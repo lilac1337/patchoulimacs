@@ -24,12 +24,22 @@
 
 ;; automatically complete brackets/quotes
 (setq-default electric-pair-pairs '(
-                            (?\( . ?\))
-                            (?\[ . ?\])
-                            (?\{ . ?\})
-                            (?\" . ?\")
-                            (?\' . ?\')
-                            ))
+                                    (?\( . ?\))
+                                    (?\[ . ?\])
+                                    (?\{ . ?\})
+                                    (?\" . ?\")
+                                    (?\' . ?\')
+                                    ))
+(electric-pair-mode t)
+
+;; prettify symbols
+(global-prettify-symbols-mode t)
+
+;; don't make a new window whenever you open a new directory in dired
+(setq dired-kill-when-opening-new-dired-buffer t)
+
+;; if you have multiple dired buffers, have the last dired buffer's directory be the default target
+(setq dired-dwim-target t)
 
 (setq-default inhibit-splash-screen t)
 (setq-default initial-scratch-message nil)
@@ -39,12 +49,10 @@
       `((".*" . ,temporary-file-directory)))
 (setq-default auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
-(electric-pair-mode t)
 (when window-system
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (global-prettify-symbols-mode t))
+  (menu-bar-mode -1))
 
 ;; from stackexchange user "Ole"
 ;; Makes *scratch* empty.
@@ -69,6 +77,9 @@
 
 ;; Don't show *Buffer list* when opening multiple files at the same time.
 (setq inhibit-startup-buffer-menu t)
+
+;; allow y and n for yes or no questions
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; highlight current line
 (global-hl-line-mode t)
@@ -102,21 +113,21 @@
 (size-indication-mode)
 (display-time-mode)
 
-;; moar width
-(setq erc-fill-column 135)
-;; Protect me from accidentally sending excess lines.
-(setq erc-inhibit-multiline-input t)
-(setq erc-send-whitespace-lines t)
-(setq erc-ask-about-multiline-input t)
-;; Scroll all windows to prompt when submitting input.
-(setq erc-scrolltobottom-all t)
+;; from github user snackon's witchmacs repo
+;; (go look at that config, it inspired this one)
+(defun split-and-follow-horizontally ()
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
 
-;; dired-mode ;;
-;; don't make a new window whenever you open a new directory in dired
-(setq dired-kill-when-opening-new-dired-buffer t)
-
-;; if you have multiple dired buffers, have the last dired buffer's directory be the default target
-(setq dired-dwim-target t)
+(defun split-and-follow-vertically ()
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
 ;;  (use-package aggressive-indent
 ;;    :ensure t
@@ -125,11 +136,13 @@
 
 (use-package beacon
   :ensure t
+  :diminish beacon-mode
   :init
   (beacon-mode 1))
 
 (use-package company
   :ensure t
+  :diminish company-mode
   :init
   (setq company-minimum-prefix-length 1
         company-idle-delay 0.0)
@@ -143,6 +156,14 @@
   ;;    (setq dashboard-banner-logo-title )
   (setq dashboard-center-content t)
   (setq dashboard-startup-banner "~/.emacs.d/images/patchouli.png"))
+
+(use-package diminish
+  ;; we'll diminish some modes that don't have their own section here,
+  ;; most modes we diminish within their use-package scope
+  ;; if you add to this config and wish to diminish your own minor modes,
+  ;; C-h v local-minor-modes will show you all of the active ones
+  :diminish auto-revert-mode
+  :ensure t)
 
 (use-package dimmer
   :ensure t
@@ -196,6 +217,14 @@
   (setq erc-save-queries-on-quit nil)
   (setq erc-log-write-after-insert t)
   (setq erc-log-write-after-send t)
+  ;; moar width
+  (setq erc-fill-column 135)
+  ;; Protect me from accidentally sending excess lines.
+  (setq erc-inhibit-multiline-input t)
+  (setq erc-send-whitespace-lines t)
+  (setq erc-ask-about-multiline-input t)
+  ;; Scroll all windows to prompt when submitting input.
+  (setq erc-scrolltobottom-all t)
   (erc-update-modules))
 
 (use-package ewal
@@ -232,6 +261,7 @@
 
 (use-package flycheck
   :ensure t
+  :diminish flycheck-mode
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
@@ -248,6 +278,8 @@
 
 (use-package lsp-mode
   :ensure t
+  :diminish lsp-mode
+  :diminish lsp-modeline-code-actions-mode
   :init
   (setq lsp-keymap-prefix "C-c l"
         lsp-idle-delay 0.1)
@@ -294,6 +326,7 @@
 (when (load-file "~/.emacs.d/pass.el") 
   (use-package wakatime-mode
     :ensure t
+    :diminish wakatime-mode
     :config
     (setq-default wakatime-cli-path "~/.wakatime/wakatime-cli"
                   wakatime-api-key wakatime-pass)
@@ -302,10 +335,12 @@
 
 (use-package which-key
   :ensure t
+  :diminish whick-key-mode
   :init
   (which-key-mode))
 
 (use-package yasnippet
   :ensure t
+  :diminish yas-minor-mode
   :init
   (yas-global-mode 1))

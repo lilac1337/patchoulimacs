@@ -15,7 +15,7 @@ if you're on windows, idk you'll have to google where to put emacs configs
   ;; syntax highlighting
   (setq font-lock-maximum-decoration t)
   (global-font-lock-mode t)
-  
+
   ;; line numbers
   (setq-default line-number-mode t)
   (global-display-line-numbers-mode 1)
@@ -38,12 +38,16 @@ if you're on windows, idk you'll have to google where to put emacs configs
 
   ;; automatically complete brackets/quotes
   (setq-default electric-pair-pairs '(
-                              (?\( . ?\))
-                              (?\[ . ?\])
-                              (?\{ . ?\})
-                              (?\" . ?\")
-                              (?\' . ?\')
-                              ))
+                                      (?\( . ?\))
+                                      (?\[ . ?\])
+                                      (?\{ . ?\})
+                                      (?\" . ?\")
+                                      (?\' . ?\')
+                                      ))
+  (electric-pair-mode t)
+
+  ;; prettify symbols
+  (global-prettify-symbols-mode t)
 #+END_SRC
 ** dired-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -63,14 +67,13 @@ if you're on windows, idk you'll have to google where to put emacs configs
         `((".*" . ,temporary-file-directory)))
   (setq-default auto-save-file-name-transforms
         `((".*" ,temporary-file-directory t)))
-  (electric-pair-mode t)
   (when window-system
     (scroll-bar-mode -1)
     (tool-bar-mode -1)
-    (menu-bar-mode -1)
-    (global-prettify-symbols-mode t))
+    (menu-bar-mode -1))
 #+END_SRC
 ** disable buffers i don't use
+emacs opens a lot of ubuffers i don't use by default, you may want some of these
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; from stackexchange user "Ole"
   ;; Makes *scratch* empty.
@@ -96,7 +99,12 @@ if you're on windows, idk you'll have to google where to put emacs configs
   ;; Don't show *Buffer list* when opening multiple files at the same time.
   (setq inhibit-startup-buffer-menu t)
 #+END_SRC
-
+** emacs improvements
+little tweaks for changing behavior of emacs
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;; allow y and n for yes or no questions
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
 ** editing improvements
 non-coding related editing enhancements
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -142,6 +150,26 @@ actual themeing is done through the ewal package below
   (size-indication-mode)
   (display-time-mode)
 #+END_SRC
+* local functions
+** window cursor switching
+creating a window switches your cursor to it
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;; from github user snackon's witchmacs repo
+  ;; (go look at that config, it inspired this one)
+  (defun split-and-follow-horizontally ()
+    (interactive)
+    (split-window-below)
+    (balance-windows)
+    (other-window 1))
+  (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+
+  (defun split-and-follow-vertically ()
+    (interactive)
+    (split-window-right)
+    (balance-windows)
+    (other-window 1))
+  (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+#+END_SRC
 * packages
 ** aggressive indent (disabled)
 keeps code properly indented
@@ -156,6 +184,7 @@ find cursor after moving
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package beacon
     :ensure t
+    :diminish beacon-mode
     :init
     (beacon-mode 1))
 #+END_SRC
@@ -164,6 +193,7 @@ little autocomplete box
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package company
     :ensure t
+    :diminish company-mode
     :init
     (setq company-minimum-prefix-length 1
           company-idle-delay 0.0)
@@ -180,6 +210,17 @@ add a nice dashboard for when you open emacs
     ;;    (setq dashboard-banner-logo-title )
     (setq dashboard-center-content t)
     (setq dashboard-startup-banner "~/.emacs.d/images/patchouli.png"))
+#+END_SRC
+** diminish
+hide minor modes in your mode line
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package diminish
+    ;; we'll diminish some modes that don't have their own section here,
+    ;; most modes we diminish within their use-package scope
+    ;; if you add to this config and wish to diminish your own minor modes,
+    ;; C-h v local-minor-modes will show you all of the active ones
+    :diminish auto-revert-mode
+    :ensure t)
 #+END_SRC
 ** dimmer
 dim inactive windows
@@ -297,6 +338,7 @@ on the *fly* error checking
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package flycheck
     :ensure t
+    :diminish flycheck-mode
     :init
     (add-hook 'after-init-hook #'global-flycheck-mode))
 #+END_SRC
@@ -322,6 +364,8 @@ language server protocol
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package lsp-mode
     :ensure t
+    :diminish lsp-mode
+    :diminish lsp-modeline-code-actions-mode
     :init
     (setq lsp-keymap-prefix "C-c l"
           lsp-idle-delay 0.1)
@@ -389,6 +433,7 @@ track emacs usage https://wakatime.com/emacs
   (when (load-file "~/.emacs.d/pass.el") 
     (use-package wakatime-mode
       :ensure t
+      :diminish wakatime-mode
       :config
       (setq-default wakatime-cli-path "~/.wakatime/wakatime-cli"
                     wakatime-api-key wakatime-pass)
@@ -402,6 +447,7 @@ show key bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package which-key
     :ensure t
+    :diminish which-key-mode
     :init
     (which-key-mode))
 #+END_SRC
@@ -410,6 +456,7 @@ autocomplete for company-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package yasnippet
     :ensure t
+    :diminish yas-minor-mode
     :init
     (yas-global-mode 1))
 #+END_SRC
