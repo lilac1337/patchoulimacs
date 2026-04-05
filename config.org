@@ -45,6 +45,14 @@ if you're on windows, idk you'll have to google where to put emacs configs
                               (?\' . ?\')
                               ))
 #+END_SRC
+** dired-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;; don't make a new window whenever you open a new directory in dired
+  (setq dired-kill-when-opening-new-dired-buffer t)
+  
+  ;; if you have multiple dired buffers, have the last dired buffer's directory be the default target
+  (setq dired-dwim-target t)
+#+END_SRC
 ** disable junk
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq-default inhibit-splash-screen t)
@@ -98,7 +106,7 @@ non-coding related editing enhancements
   ;; interactively do things in minibuffers
   (ido-mode t)
 #+END_SRC
-** org mode
+** org-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; open org files with everything collapsed
   (setq-default org-startup-folded t)
@@ -133,27 +141,6 @@ actual themeing is done through the ewal package below
   ;; modeline stuff
   (size-indication-mode)
   (display-time-mode)
-#+END_SRC
-** irc
-we'll use erc as our client because why not
-#+BEGIN_SRC emacs-lisp :tangle yes
-    ;; moar width
-  (setq erc-fill-column 135)
-  ;; Protect me from accidentally sending excess lines.
-  (setq erc-inhibit-multiline-input t)
-  (setq erc-send-whitespace-lines t)
-  (setq erc-ask-about-multiline-input t)
-  ;; Scroll all windows to prompt when submitting input.
-  (setq erc-scrolltobottom-all t)
-#+END_SRC
-** other
-#+BEGIN_SRC emacs-lisp :tangle yes
-  ;; dired-mode ;;
-  ;; don't make a new window whenever you open a new directory in dired
-  (setq dired-kill-when-opening-new-dired-buffer t)
-  
-  ;; if you have multiple dired buffers, have the last dired buffer's directory be the default target
-  (setq dired-dwim-target t)
 #+END_SRC
 * packages
 ** aggressive indent (disabled)
@@ -258,6 +245,14 @@ an irc client for emacs
     (setq erc-save-queries-on-quit nil)
     (setq erc-log-write-after-insert t)
     (setq erc-log-write-after-send t)
+    ;; moar width
+    (setq erc-fill-column 135)
+    ;; Protect me from accidentally sending excess lines.
+    (setq erc-inhibit-multiline-input t)
+    (setq erc-send-whitespace-lines t)
+    (setq erc-ask-about-multiline-input t)
+    ;; Scroll all windows to prompt when submitting input.
+    (setq erc-scrolltobottom-all t)
     (erc-update-modules))
 #+END_SRC
 ** ewal

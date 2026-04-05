@@ -111,8 +111,11 @@
 ;; Scroll all windows to prompt when submitting input.
 (setq erc-scrolltobottom-all t)
 
-;; dired-mode
+;; dired-mode ;;
+;; don't make a new window whenever you open a new directory in dired
 (setq dired-kill-when-opening-new-dired-buffer t)
+
+;; if you have multiple dired buffers, have the last dired buffer's directory be the default target
 (setq dired-dwim-target t)
 
 ;;  (use-package aggressive-indent
