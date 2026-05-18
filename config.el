@@ -42,7 +42,6 @@
 (setq dired-dwim-target t)
 
 (setq-default inhibit-splash-screen t)
-(setq-default initial-scratch-message nil)
 (setq-default inhibit-startup-message t)
 (setq-default ring-bell-function 'ignore)
 (setq-default backup-directory-alist
@@ -56,17 +55,17 @@
 
 ;; from stackexchange user "Ole"
 ;; Makes *scratch* empty.
-(setq initial-scratch-message "")
+(setq-default initial-scratch-message "")
 
 ;; Removes *scratch* from buffer after the mode has been set.
-;;(defun remove-scratch-buffer ()
-;;  (if (get-buffer "*scratch*")
-;;      (kill-buffer "*scratch*")))
-;;(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+(defun remove-scratch-buffer ()
+  (if (get-buffer "*scratch*")
+      (kill-buffer "*scratch*")))
+(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
 ;; Removes *messages* from the buffer.
 (setq-default message-log-max nil)
-;;(kill-buffer "*Messages*")
+(kill-buffer "*Messages*")
 
 ;; Removes *Completions* from buffer after you've opened a file.
 (add-hook 'minibuffer-exit-hook
@@ -169,7 +168,7 @@
   :ensure t
   :config
   (progn
-    (setq dimmer-fraction 0.75)
+    (setq dimmer-fraction 0.25)
     (setq dimmer-adjustment-mode :foreground)
     (dimmer-configure-which-key)
     (dimmer-configure-magit))
@@ -335,7 +334,7 @@
 
 (use-package which-key
   :ensure t
-  :diminish whick-key-mode
+  :diminish which-key-mode
   :init
   (which-key-mode))
 
