@@ -316,6 +316,10 @@ generate color scheme automatically from pywal
 #+END_SRC
 ** extra languages
 #+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package actionscript-mode
+    :ensure t
+    :init)
+  
   (use-package lua-mode
     :ensure t
     :init)

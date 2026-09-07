@@ -30,12 +30,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(aggressive-indent beacon company dashboard diminish dimmer
-                       editorconfig elcord ewal-spacemacs-themes
-                       flycheck good-scroll goto-line-preview lsp-java
-                       lsp-ui lua-mode magit pc-bufsw protobuf-mode
-                       rainbow-delimiters rainbow-mode sourcepawn-mode
-                       swiper typescript-mode wakatime-mode which-key
+   '(actionscript-mode aggressive-indent beacon company dashboard
+                       diminish dimmer editorconfig elcord
+                       ewal-spacemacs-themes flycheck good-scroll
+                       goto-line-preview lsp-java lsp-ui lua-mode
+                       magit pc-bufsw protobuf-mode rainbow-delimiters
+                       rainbow-mode sourcepawn-mode swiper
+                       typescript-mode wakatime-mode which-key
                        yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

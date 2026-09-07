@@ -262,7 +262,9 @@
   :ensure t
   :diminish flycheck-mode
   :init
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  (setq flycheck-clang-language-standard "c23")
+  (setq flycheck-gcc-language-standard "c23"))
 
 (use-package good-scroll
   :ensure t
