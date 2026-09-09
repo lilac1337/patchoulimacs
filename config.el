@@ -242,6 +242,10 @@
             (load-theme 'ewal-spacemacs-modern t)
             (enable-theme 'ewal-spacemacs-modern)))
 
+(use-package actionscript-mode
+  :ensure t
+  :init)
+
 (use-package lua-mode
   :ensure t
   :init)
@@ -284,6 +288,8 @@
   :init
   (setq lsp-keymap-prefix "C-c l"
         lsp-idle-delay 0.1)
+  (setq lsp-actionscript-java-path "/usr/bin/java")
+  (setq lsp-actionscript-sdk-path "/usr/lib64/node_modules/@apache-royale/royale-js-swf")
   ;;:hook ((c++-mode . clangd)
   ;;       (python-mode . lsp)
   ;;       (c-mode . clangd)
