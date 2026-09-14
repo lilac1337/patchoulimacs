@@ -103,6 +103,10 @@ little tweaks for changing behavior of emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; allow y and n for yes or no questions
   (defalias 'yes-or-no-p 'y-or-n-p)
+
+  ;; garbage collect less often, mainly useful for lsp-mode
+  ;; if your system has low memory, you may want to decrease this
+  (setq gc-cons-threshold 100000000)
 #+END_SRC
 ** editing improvements
 non-coding related editing enhancements
